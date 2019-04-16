@@ -42,13 +42,15 @@ export
       cell.value.text = "print('hi')"
 
       notebook.activeCellIndex = 0
-      NotebookActions.run(notebook)
+      NotebookActions.run(notebook, context.session)
+
+
 
       // context.session
 
 
 
-      // NotebookActions.runAll(panel.notebook, context.session);
+      NotebookActions.runAll(notebook, context.session);
     };
 
 
@@ -83,7 +85,7 @@ const extension: JupyterLabPlugin<void> = {
   id: 'henry',
   autoStart: true,
   activate: (app: JupyterLab) => {
-    console.log('JupyterLab extension henry 14 is activated!');
+    console.log('JupyterLab extension henry 15 is activated!');
     app.docRegistry.addWidgetExtension('Notebook', new StartChatBotButton());
     (<any>window).app = app;
   }
