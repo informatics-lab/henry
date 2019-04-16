@@ -50,7 +50,7 @@ export
 
 
 
-      NotebookActions.runAll(notebook, context.session);
+      // NotebookActions.runAll(notebook, context.session);
     };
 
 
@@ -85,7 +85,7 @@ const extension: JupyterLabPlugin<void> = {
   id: 'henry',
   autoStart: true,
   activate: (app: JupyterLab) => {
-    console.log('JupyterLab extension henry 15 is activated!');
+    console.log('JupyterLab extension henry 16 is activated!');
     app.docRegistry.addWidgetExtension('Notebook', new StartChatBotButton());
     (<any>window).app = app;
   }
