@@ -16,6 +16,7 @@ import {
     IDisposable, DisposableDelegate
 } from '@phosphor/disposable';
 import '../style/index.css';
+import { createChatWindow } from './chatwindow';
 
 
 
@@ -28,9 +29,8 @@ export
      * Create a new extension object.
      */
     createNew(panel: NotebookPanel, context: DocumentRegistry.IContext<INotebookModel>): IDisposable {
-
         let notebook = panel.content;
-
+        panel.node.appendChild(createChatWindow());
         let callback = () => {
             console.log('clicked')
             let cell = panel.model.contentFactory.createCodeCell({})

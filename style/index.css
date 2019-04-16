@@ -1,0 +1,6 @@
+.henryWindow {
+    position: absolute;
+    width: 100%;
+    background: blueviolet;
+    z-index: 1000;
+}
