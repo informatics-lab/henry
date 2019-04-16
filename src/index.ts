@@ -7,7 +7,7 @@ import {
 } from '@jupyterlab/docregistry';
 
 import {
-  NotebookPanel, INotebookModel
+  NotebookActions, NotebookPanel, INotebookModel
 } from '@jupyterlab/notebook';
 
 
@@ -19,10 +19,6 @@ import {
 import {
   IDisposable, DisposableDelegate
 } from '@phosphor/disposable';
-
-
-
-
 import '../style/index.css';
 
 
@@ -36,18 +32,29 @@ export
    * Create a new extension object.
    */
   createNew(panel: NotebookPanel, context: DocumentRegistry.IContext<INotebookModel>): IDisposable {
-    console.log(panel, context);
-    (<any>window).context = context;
-    (<any>window).panel = panel;
+
+    let notebook = panel.content;
+
     let callback = () => {
       console.log('clicked')
       let cell = panel.model.contentFactory.createCodeCell({})
-      cell.value.text = "print('hi')"
       panel.model.cells.insert(0, cell)
+      cell.value.text = "print('hi')"
+
+      notebook.activeCellIndex = 0
+      NotebookActions.run(notebook)
+
+      // context.session
+
+
+
       // NotebookActions.runAll(panel.notebook, context.session);
     };
-    let startButton = new ToolbarButton({
-      className: 'myButton',
+
+
+
+    let openChatBtn = new ToolbarButton({
+      className: 'chatBtn',
       onClick: callback,
       tooltip: 'Run All',
 
@@ -60,13 +67,12 @@ export
 
     // button.
 
-    panel.toolbar.insertItem(0, 'runAll', startButton);
+    panel.toolbar.insertItem(0, 'runAll', openChatBtn);
     return new DisposableDelegate(() => {
-      startButton.dispose();
+      openChatBtn.dispose();
     });
   }
 }
-
 
 
 
@@ -77,13 +83,9 @@ const extension: JupyterLabPlugin<void> = {
   id: 'henry',
   autoStart: true,
   activate: (app: JupyterLab) => {
-    console.log('JupyterLab extension henry 10 is activated!');
-
+    console.log('JupyterLab extension henry 14 is activated!');
     app.docRegistry.addWidgetExtension('Notebook', new StartChatBotButton());
     (<any>window).app = app;
-
-
-
   }
 };
 
