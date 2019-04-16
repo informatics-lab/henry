@@ -32,7 +32,6 @@ export
         let notebook = panel.content;
         panel.node.appendChild(createChatWindow());
         let callback = () => {
-            console.log('clicked')
             let cell = panel.model.contentFactory.createCodeCell({})
             panel.model.cells.insert(0, cell)
             cell.value.text = "print('hi')"

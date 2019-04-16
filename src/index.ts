@@ -13,9 +13,8 @@ const extension: JupyterLabPlugin<void> = {
   id: 'henry',
   autoStart: true,
   activate: (app: JupyterLab) => {
-    console.log('JupyterLab extension henry 19 is activated!');
+    console.log('JupyterLab extension henry 20 is activated!');
     app.docRegistry.addWidgetExtension('Notebook', new StartChatBotButton());
-    (<any>window).app = app;
   }
 };
 
