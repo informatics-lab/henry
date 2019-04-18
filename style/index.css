@@ -4,3 +4,9 @@
     background: blueviolet;
     z-index: 1000;
 }
+
+.henry-chat-window {
+    border: solid #f6ffa3 1px;
+    padding: 3em;
+    background: #66bbcc;
+}
