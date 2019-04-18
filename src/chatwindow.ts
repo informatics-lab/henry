@@ -3,7 +3,14 @@ import { NotebookPanel } from "@jupyterlab/notebook";
 
 export function createChatWindow(nbPanel: NotebookPanel) {
 
-    return new ChatWindow('the title', nbPanel)
+
+    nbPanel.activated.connect((nb, args) => {
+        console.log(nbPanel.content.title.label)
+    })
+
+    return new ChatWindow('Henry for: ' + nbPanel.content.title.label, nbPanel)
+
+
 }
 
 
@@ -17,6 +24,7 @@ export class ChatWindow extends Widget {
         this.title.label = title;
         this.title.closable = true;
         console.log(nbPanel)
+        this.node.innerHTML = `<h1>${title}</h1>`
     }
 
 
