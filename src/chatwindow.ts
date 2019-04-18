@@ -25,6 +25,17 @@ export class ChatWindow extends Widget {
         this.title.closable = true;
         console.log(nbPanel)
         this.node.innerHTML = `<h1>${title}</h1>`
+        let btn = document.createElement('button')
+        btn.addEventListener('click', (ev: MouseEvent) => { alert('hi') })
+        btn.innerText = "click me"
+        btn.className = 'the-buttn'
+
+        // btn.onclick =
+        //     (ev: MouseEvent) => { alert('hi') }
+
+        this.node.appendChild(btn)
+
+
     }
 
 
