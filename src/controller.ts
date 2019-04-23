@@ -7,6 +7,7 @@ export class HenryController {
 
     private createChatWindowCollection(panel: NotebookPanel) {
         this.chatWindowCollection = new ChatWindowCollection();
+
         getHenryState().getApp().shell.addToMainArea(
             this.chatWindowCollection.tabPanel, { mode: 'split-right', ref: panel.id });
         this.chatWindowCollection.tabPanel.disposed.connect(() => {
