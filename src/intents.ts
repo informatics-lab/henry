@@ -1,3 +1,5 @@
+import { INotebookModel, NotebookPanel } from "@jupyterlab/notebook";
+import { DocumentRegistry } from "@jupyterlab/docregistry";
 
 export enum Intent {
     LoadData = "LoadData",
@@ -33,7 +35,12 @@ export class DataLoadIntent extends HenryIntent {
     }
 }
 
-
 export interface IntentParser {
     getIntent(msg: string): Promise<HenryIntent>
 }
+
+
+export interface IntentHandler {
+    handelIntent(intent: HenryIntent, notebookPanel: NotebookPanel, context: DocumentRegistry.IContext<INotebookModel>): Promise<string>
+}
+

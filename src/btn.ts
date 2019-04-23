@@ -36,7 +36,7 @@ export class StartChatBotButton implements DocumentRegistry.IWidgetExtension<Not
      * Create a new extension object.
      */
     createNew(panel: NotebookPanel, context: DocumentRegistry.IContext<INotebookModel>): IDisposable {
-        this.controller.newNotebook(panel)
+        this.controller.newNotebook(panel, context)
 
         let callback = () => {
             this.controller.activate(panel)
