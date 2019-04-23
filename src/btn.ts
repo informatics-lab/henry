@@ -45,7 +45,7 @@ export class StartChatBotButton implements DocumentRegistry.IWidgetExtension<Not
         let openChatBtn = new ToolbarButton({
             className: 'chatBtn',
             onClick: callback,
-            tooltip: 'Run All',
+            tooltip: 'Launch Henry',
 
             iconClassName: 'fa fa-commenting'
         });
