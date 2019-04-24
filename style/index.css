@@ -4,3 +4,80 @@
     background: blueviolet;
     z-index: 1000;
 }
+
+.henry-chat-window {
+    border: solid black 1px;
+    padding: 3%;
+    background: white;
+}
+
+.henry-message {
+    display: block;
+    background: #E0E0E0;
+    padding: 10px;
+    text-align: left;
+    border-radius: 10px;
+    border-bottom-left-radius: 0px;
+    white-space: pre-wrap;
+    max-width: 60%;
+    position: relative;
+    margin-top: 30px;
+}
+
+.user-message {
+    display: block;
+    background: var(--jp-brand-color1);
+    position: relative;
+    padding: 10px;
+    text-align: left;
+    border-radius: 10px;
+    border-bottom-right-radius: 0px;
+    white-space: pre-wrap;
+    max-width: 60%;
+    float: right;
+    color: white;
+}
+
+.henry-chat-window input {
+    position: absolute;
+    left: 0px;
+    bottom: 0px;
+    width: 80%;
+    background: white;
+    height: 5%;
+    padding: 1px;
+    padding-left: 2%;
+    font-size: medium;
+    font-weight: 600;
+    border: solid 3.5px var(--jp-brand-color1);
+    box-shadow: var(--jp-input-box-shadow);
+}
+
+.henry-chat-window button {
+    position: absolute;
+    bottom: 0px;
+    right: 0px;
+    width: 18%;
+    height: 6%;
+    color: white;
+    font-size: medium;
+    font-weight: 600;
+    background: var(--jp-brand-color1);
+    padding: 2px;
+    border: solid 1px var(--jp-brand-color1);
+    box-shadow: var(--jp-input-box-shadow);
+    right: 0px;
+    bottom: 0px;
+}
+
+.henry-chat-window input ::placeholder {
+    color: var(--jp-ui-font-color0);
+    font-weight: 600;
+    font-family: var(--jp-ui-font-family)
+}
+
+.fa {
+    margin-top: 2%;
+    font-size: large;
+    color: #ff7400;
+}

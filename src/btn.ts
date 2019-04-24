@@ -3,7 +3,7 @@ import {
 } from '@jupyterlab/docregistry';
 
 import {
-    NotebookActions, NotebookPanel, INotebookModel
+    NotebookPanel, INotebookModel
 } from '@jupyterlab/notebook';
 
 
@@ -16,35 +16,36 @@ import {
     IDisposable, DisposableDelegate
 } from '@phosphor/disposable';
 import '../style/index.css';
-import { createChatWindow } from './chatwindow';
-
+import { JupyterLab } from '@jupyterlab/application';
+import { HenryController } from './controller';
 
 
 /**
  * A notebook widget extension that adds a button to the toolbar.
  */
-export
-    class StartChatBotButton implements DocumentRegistry.IWidgetExtension<NotebookPanel, INotebookModel> {
+export class StartChatBotButton implements DocumentRegistry.IWidgetExtension<NotebookPanel, INotebookModel> {
+    requires: [JupyterLab]
+    private controller: HenryController;
+
+    constructor() {
+        this.controller = new HenryController()
+    }
+
+
     /**
      * Create a new extension object.
      */
     createNew(panel: NotebookPanel, context: DocumentRegistry.IContext<INotebookModel>): IDisposable {
-        let notebook = panel.content;
-        panel.node.appendChild(createChatWindow());
+        this.controller.newNotebook(panel)
+
         let callback = () => {
-            let cell = panel.model.contentFactory.createCodeCell({})
-            panel.model.cells.insert(0, cell)
-            cell.value.text = "print('hi')"
-
-            notebook.activeCellIndex = 0
-            NotebookActions.run(notebook, context.session)
-
+            this.controller.activate(panel)
         };
 
         let openChatBtn = new ToolbarButton({
             className: 'chatBtn',
             onClick: callback,
-            tooltip: 'Run All',
+            tooltip: 'Launch Henry',
 
             iconClassName: 'fa fa-commenting'
         });
