@@ -11,9 +11,6 @@ function parse(msg: string): HenryIntent {
 }
 export class RegExpIntentParser implements IntentParser {
     getIntent(msg: string): Promise<HenryIntent> {
-        return new Promise((resolve, reject) => {
-            resolve(parse(msg))
-        })
-
+        return Promise.resolve(parse(msg))
     }
 }
