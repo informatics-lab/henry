@@ -16,7 +16,7 @@ export class ChatWindowCollection {
     private setTitle(nbPanel: NotebookPanel) {
         if (nbPanel) {
             this.tabPanel.title.label = `Henry (${nbPanel.title.label})`
-            this.tabPanel.title.iconClass = "fa fa-smile-o"
+            this.tabPanel.title.iconClass = "fa fa-user"
         } else {
             this.tabPanel.title.label = "No Henry Here."
             this.tabPanel.title.iconClass = "fa fa-frown-o"
@@ -121,9 +121,9 @@ export class ChatWindow extends Widget {
         this.outArea = document.createElement('div')
         this.input = document.createElement('input')
 
-        this.input.placeholder = 'Chat to me...'
+        this.input.placeholder = 'Ask me something'
 
-        this.submitButton.innerText = "Answer please!"
+        this.submitButton.innerText = "Send"
         this.submitButton.addEventListener('click', this.handelSubmit)
         this.input.addEventListener('keyup', this.handelKeyup)
 
