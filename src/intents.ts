@@ -25,8 +25,8 @@ export class UnknownIntent extends HenryIntent {
 
 export class DataLoadIntent extends HenryIntent {
     type = Intent.LoadData
-    readonly dataset: string
-    readonly param: string
+    public readonly dataset: string
+    public readonly param: string
 
     constructor(msg: string, dataset: string, param: string) {
         super(msg)

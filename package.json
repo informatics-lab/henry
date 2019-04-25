@@ -31,7 +31,9 @@
   },
   "dependencies": {
     "@jupyterlab/application": "^0.19.1",
-    "@jupyterlab/notebook": "^0.19.2"
+    "@jupyterlab/notebook": "^0.19.2",
+    "@types/js-yaml": "^3.12.1",
+    "js-yaml": "^3.13.1"
   },
   "devDependencies": {
     "rimraf": "^2.6.1",
