@@ -104,14 +104,14 @@ export class ChatWindow extends Widget {
 
     private showUserMsg(msg: string) {
         let msgContainer = document.createElement('div')
-        msgContainer.className = 'user-message'
+        msgContainer.className = 'henry-message user-message'
         msgContainer.innerText = msg
         this.outArea.appendChild(msgContainer)
     }
 
     public addReply = (msg: string) => {
         let msgContainer = document.createElement('div')
-        msgContainer.className = 'henry-message'
+        msgContainer.className = 'henry-message bot-message'
         msgContainer.innerText = msg
         this.outArea.appendChild(msgContainer)
     }
