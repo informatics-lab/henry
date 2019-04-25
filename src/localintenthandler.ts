@@ -29,9 +29,9 @@ function handelLoadDate(intent: DataLoadIntent, nbp: NotebookPanel, context: Doc
 
     let code = "import intake\n"
     code += `henry_loaded_data = [` + cubes.map(cube => `intake.cat.${cube.key}.read()`).join(',') + `]\n`
-    code += 'henry_loaded_data'
+    code += "henry_loaded_data"
 
-    let msg = "I hope this helps...";
+    let msg = `I hope this helps... I loaded ${intent.param} from ${intent.dataset}`;
     let cell = nb.model.contentFactory.createCodeCell({})
     let insertAt = nb.activeCellIndex + 1
     nb.model.cells.insert(insertAt, cell)

@@ -54,6 +54,7 @@ interface HypotheticCubeDesc {
 }
 
 export function findCubes(param: string = null, model: string = null): HypotheticCubeDesc[] {
+    console.log("in find cubes", param, model)
     function clean(dirty: string) {
         if (!dirty) {
             return dirty
@@ -66,7 +67,7 @@ export function findCubes(param: string = null, model: string = null): Hypotheti
         if (!param) {
             return true
         }
-        return clean(cube.name).search(param) >= 0 || clean(cube.description).search(param)
+        return clean(cube.name).search(param) >= 0 || clean(cube.description).search(param) >= 0
     }).filter((cube) => {
         if (!model) {
             return true
