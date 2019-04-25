@@ -5,6 +5,7 @@ import {
 import '../style/index.css';
 import { StartChatBotButton } from './btn';
 import { getHenryState } from './state';
+import { getCats } from './datacat';
 
 
 /**
@@ -14,7 +15,8 @@ const extension: JupyterLabPlugin<void> = {
   id: 'henry',
   autoStart: true,
   activate: (app: JupyterLab) => {
-    console.log('JupyterLab extension henry 69 is activated!');
+    console.log('JupyterLab extension henry 71 is activated!');
+    getCats()
     getHenryState().setApp(app)
     app.docRegistry.addWidgetExtension('Notebook', new StartChatBotButton());
   }

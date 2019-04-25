@@ -1,10 +1,7 @@
 import { Widget, TabPanel } from "@phosphor/widgets";
 import { NotebookPanel } from "@jupyterlab/notebook";
-import { RegExpIntentParser } from './regexintentparser';
 import { UUID } from "@phosphor/coreutils";
-import { HenryIntent, Intent } from "./intents";
-
-let intentParser = new RegExpIntentParser();
+import { ISignal, Signal } from "@phosphor/signaling";
 
 export class ChatWindowCollection {
 
@@ -14,13 +11,6 @@ export class ChatWindowCollection {
         this.tabPanel = new TabPanel()
         this.tabPanel.title.label = "Henry"
         this.tabPanel.id = UUID.uuid4()
-        // TODO: think about if want below
-        // this.tabPanel.currentChanged.connect((tp, args) => {
-        //     let chatWindow = (this.tabPanel.widgets[args.currentIndex] as ChatWindow)
-        //     if (chatWindow) {
-        //         this.setTitle(chatWindow.nbPanel)
-        //     }
-        // })
     }
 
     private setTitle(nbPanel: NotebookPanel) {
@@ -33,10 +23,10 @@ export class ChatWindowCollection {
         }
     }
 
-    private getChatWindow(nbPanel: NotebookPanel) {
+    private getChatWindow(nbPanel: NotebookPanel): ChatWindow {
         for (const chatWindow of this.tabPanel.widgets) {
             if ((chatWindow as ChatWindow).nbPanel.id == nbPanel.id) {
-                return chatWindow
+                return chatWindow as ChatWindow
             }
         }
     }
@@ -46,23 +36,24 @@ export class ChatWindowCollection {
         if (cw) {
             this.tabPanel.currentWidget = this.getChatWindow(nbPanel)
             this.setTitle(nbPanel)
-            // this.tabPanel.setHidden(false)
         } else {
             this.setTitle(null)
             this.tabPanel.currentIndex = -1
-            // this.tabPanel.setHidden(true)
         }
     }
 
-    public addWindow(nbPanel: NotebookPanel) {
-        // If already have this chat window just focus
-        let existingWindow = this.getChatWindow(nbPanel)
-        if (!existingWindow) {
-            this.tabPanel.addWidget(new ChatWindow(nbPanel))
+    public addWindow = (nbPanel: NotebookPanel) => {
+        let theWindow = this.getChatWindow(nbPanel)
+        if (!theWindow) {
+            theWindow = new ChatWindow(nbPanel)
+            this.tabPanel.addWidget(theWindow)
+        } else {
+            this.focus(nbPanel)
         }
+        return theWindow
     }
 
-    public removeWindow(nbPanel: NotebookPanel) {
+    public removeWindow = (nbPanel: NotebookPanel) => {
         let existingWindow = this.getChatWindow(nbPanel)
         if (existingWindow) {
             existingWindow.dispose()
@@ -76,6 +67,7 @@ export class ChatWindow extends Widget {
     private outArea: HTMLElement
     private submitButton: HTMLButtonElement
     public readonly nbPanel: NotebookPanel
+    private _userMessage = new Signal<this, string>(this)
 
     constructor(nbPanel: NotebookPanel) {
         super();
@@ -86,7 +78,11 @@ export class ChatWindow extends Widget {
         this.title.label = `Henry for ${nbTitle}`;
         this.title.closable = true;
         this.render()
-        this.showReply(`Hi how can I help you with your notebook ${nbTitle}`)
+        this.addReply(`Hi how can I help you with your notebook ${nbTitle}`)
+    }
+
+    get userMessage(): ISignal<this, string> {
+        return this._userMessage;
     }
 
     private handelSubmit = (evt: Event) => {
@@ -103,44 +99,24 @@ export class ChatWindow extends Widget {
         let msg = this.input.value
         this.showUserMsg(msg)
         this.input.value = ''
-        intentParser.getIntent(msg).then(this.handelIntent)
-    }
-
-    private handelIntent = (intent: HenryIntent) => {
-        console.log(intent)
-        let msg = "Error..."
-
-        switch (intent.type) {
-
-            case Intent.LoadData:
-                msg = "So you want some data?"
-                break;
-
-            case Intent.Unknown:
-                msg = "I don't know how to help."
-                break;
-
-        }
-        this.showReply(msg)
+        this._userMessage.emit(msg)
     }
 
     private showUserMsg(msg: string) {
         let msgContainer = document.createElement('div')
-        msgContainer.className = 'user-message'
+        msgContainer.className = 'henry-message user-message'
         msgContainer.innerText = msg
         this.outArea.appendChild(msgContainer)
     }
 
-    private showReply(msg: string) {
+    public addReply = (msg: string) => {
         let msgContainer = document.createElement('div')
-        msgContainer.className = 'henry-message'
+        msgContainer.className = 'henry-message bot-message'
         msgContainer.innerText = msg
         this.outArea.appendChild(msgContainer)
     }
 
     private render() {
-
-
         this.submitButton = document.createElement('button')
         this.outArea = document.createElement('div')
         this.input = document.createElement('input')
