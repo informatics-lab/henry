@@ -3,7 +3,8 @@ import { DocumentRegistry } from "@jupyterlab/docregistry";
 
 export enum Intent {
     LoadData = "LoadData",
-    Unknown = "Unkown"
+    Unknown = "Unkown",
+    CreateCluster = "CreateCluster"
 }
 
 export class HenryIntent {
@@ -20,6 +21,26 @@ export class UnknownIntent extends HenryIntent {
 
     constructor(msg: string) {
         super(msg)
+    }
+}
+
+export class CreateClusterIntent extends HenryIntent {
+    type = Intent.CreateCluster
+    public readonly min: number = null
+    public readonly max: number = null
+
+    constructor(msg: string, min: number, max: number) {
+        super(msg)
+        if (isNumber(min) && min >= 0) {
+            this.min = Math.floor(min)
+        }
+        if (isNumber(max) && max >= 1) {
+            this.max = Math.floor(max)
+        }
+        if (isNumber(max) && isNumber(min) && (min > max)) {
+            this.max = null
+            this.min = null
+        }
     }
 }
 
@@ -44,3 +65,6 @@ export interface IntentHandler {
     handelIntent(intent: HenryIntent, notebookPanel: NotebookPanel, context: DocumentRegistry.IContext<INotebookModel>): Promise<string>
 }
 
+function isNumber(number: any) {
+    return typeof number === "number" && !isNaN(number)
+}
