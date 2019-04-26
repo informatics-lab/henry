@@ -3,7 +3,9 @@ import { DocumentRegistry } from "@jupyterlab/docregistry";
 
 export enum Intent {
     LoadData = "LoadData",
-    Unknown = "Unkown"
+    Unknown = "Unkown",
+    Greeting = "Greeting",
+    Thankyou = "Thankyou",
 }
 
 export class HenryIntent {
@@ -12,6 +14,22 @@ export class HenryIntent {
 
     constructor(msg: string) {
         this.orgMsg = msg
+    }
+}
+
+export class GreetingIntent extends HenryIntent {
+    type = Intent.Greeting
+
+    constructor(msg: string) {
+        super(msg)
+    }
+}
+
+export class ThankyouIntent extends HenryIntent {
+    type = Intent.Thankyou
+
+    constructor(msg: string) {
+        super(msg)
     }
 }
 
