@@ -1,6 +1,6 @@
 {
     "name": "@informaticslab/henry",
-    "version": "0.1.2",
+    "version": "0.1.3",
     "description": "A chat bot experiment for Jupyter Lab intended for the Informatics Lab Pangeo implementation",
     "keywords": [
         "jupyter",
