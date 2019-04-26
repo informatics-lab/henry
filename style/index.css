@@ -1,12 +1,4 @@
-.henryWindow {
-    position: absolute;
-    width: 100%;
-    background: blueviolet;
-    z-index: 1000;
-}
-
 .henry-chat-window {
-    border: solid black 1px;
     padding: 3%;
     background: white;
 }
