@@ -19,26 +19,14 @@ export class HenryIntent {
 
 export class GreetingIntent extends HenryIntent {
     type = Intent.Greeting
-
-    constructor(msg: string) {
-        super(msg)
-    }
 }
 
 export class ThankyouIntent extends HenryIntent {
     type = Intent.Thankyou
-
-    constructor(msg: string) {
-        super(msg)
-    }
 }
 
 export class UnknownIntent extends HenryIntent {
     type = Intent.Unknown
-
-    constructor(msg: string) {
-        super(msg)
-    }
 }
 
 export class DataLoadIntent extends HenryIntent {
