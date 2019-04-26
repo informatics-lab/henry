@@ -9,6 +9,7 @@ export function getCats() {
 }
 
 function addCat(key: string, url: string) {
+    url = url.replace('http://', 'https://') // Try to avoid 'Mixed Content' errors due to making http requests form https site.
     console.info(`Gettting cat ${url}`)
     fetch(url).then(res => res.text()).then(text => yaml.load(text)).then((cat) => parseCat(key, cat))
 }
