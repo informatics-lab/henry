@@ -4,7 +4,9 @@ import { DocumentRegistry } from "@jupyterlab/docregistry";
 export enum Intent {
     LoadData = "LoadData",
     Unknown = "Unkown",
-    CreateCluster = "CreateCluster"
+    CreateCluster = "CreateCluster",
+    Greeting = "Greeting",
+    Thankyou = "Thankyou",
 }
 
 export class HenryIntent {
@@ -16,12 +18,16 @@ export class HenryIntent {
     }
 }
 
+export class GreetingIntent extends HenryIntent {
+    type = Intent.Greeting
+}
+
+export class ThankyouIntent extends HenryIntent {
+    type = Intent.Thankyou
+}
+
 export class UnknownIntent extends HenryIntent {
     type = Intent.Unknown
-
-    constructor(msg: string) {
-        super(msg)
-    }
 }
 
 export class CreateClusterIntent extends HenryIntent {

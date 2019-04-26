@@ -1,12 +1,12 @@
-.henryWindow {
-    position: absolute;
-    width: 100%;
-    background: blueviolet;
-    z-index: 1000;
+.henry-cell {
+    transition: background-color 0.5s ease;
+}
+
+.henry-flash {
+    background: #ffffBB !important;
 }
 
 .henry-chat-window {
-    border: solid black 1px;
     padding: 3%;
     background: white;
 }
@@ -51,7 +51,7 @@
     font-weight: 600;
     border: solid 1px var(--jp-brand-color1);
     box-shadow: var(--jp-input-box-shadow);
-} 
+}
 
 .henry-chat-window button {
     box-sizing: border-box;

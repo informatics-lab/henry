@@ -5,7 +5,7 @@ const TOP_LEVEL_CAT = 'https://s3.eu-west-2.amazonaws.com/aws-earth-mo-intake-ca
 
 let cubes: HypotheticCubeDesc[] = [];
 export function getCats() {
-    addCat('aws_earth', TOP_LEVEL_CAT)
+    addCat('mo_aws_earth', TOP_LEVEL_CAT)
 }
 
 function addCat(key: string, url: string) {
@@ -15,11 +15,12 @@ function addCat(key: string, url: string) {
 
 function parseCat(srcKey: string, cat: any) {
     for (let key of Object.keys(cat.sources)) {
+        let fullKey = `${srcKey}.${key}`
         let source = cat.sources[key]
         if (source.driver == "intake.catalog.local.YAMLFileCatalog") {
-            addCat(`${srcKey}.${key}`, source.args.path)
+            addCat(fullKey, source.args.path)
         } else if (source.driver == "hypothetic") {
-            addEntry(key, source)
+            addEntry(fullKey, source)
         } else {
             console.log(`don't know how to deal with source with driver ${source.driver}`)
         }
@@ -53,25 +54,24 @@ interface HypotheticCubeDesc {
 
 }
 
-export function findCubes(param: string = null, model: string = null): HypotheticCubeDesc[] {
-    console.log("in find cubes", param, model)
-    function clean(dirty: string) {
-        if (!dirty) {
-            return dirty
-        }
-        return dirty.toLocaleLowerCase().replace(/[ -_]*/g, '')
+function cleanSearchTerm(dirty: string) {
+    if (!dirty) {
+        return dirty
     }
-    param = clean(param)
-    model = clean(model)
-    return cubes.filter((cube) => {
-        if (!param) {
-            return true
-        }
-        return clean(cube.name).search(param) >= 0 || clean(cube.description).search(param) >= 0
-    }).filter((cube) => {
-        if (!model) {
-            return true
-        }
-        return clean(cube.model).search(model) >= 0
-    })
+    return dirty.toLocaleLowerCase().replace(/[ -_]*/g, '')
+}
+
+export function findCubes(param: string = null, model: string = null): HypotheticCubeDesc[] {
+
+    param = cleanSearchTerm(param)
+    model = cleanSearchTerm(model)
+
+    let found = cubes
+    if (param) {
+        found = found.filter(cube => (cleanSearchTerm(cube.name).search(param) >= 0 || cleanSearchTerm(cube.description).search(param) >= 0))
+    }
+    if (model) {
+        found = found.filter(cube => cleanSearchTerm(cube.model).search(model) >= 0)
+    }
+    return found
 }
