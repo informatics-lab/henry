@@ -1,4 +1,4 @@
-import { IntentParser, HenryIntent, UnknownIntent, DataLoadIntent } from "./intents";
+import { IntentParser, HenryIntent, UnknownIntent, DataLoadIntent, GreetingIntent, ThankyouIntent } from "./intents";
 
 
 
@@ -10,6 +10,20 @@ function parse(msg: string): HenryIntent {
     if (match) {
         return new DataLoadIntent(msg, match[4], match[2])
     }
+
+    let greetingRegEx = /(hi|hey|hello)/
+    // let match = msg.toLowerCase().match(greetingRegEx)
+    if (match = msg.toLowerCase().match(greetingRegEx)) {
+        return new GreetingIntent(msg)
+    }
+
+    let thankyouRegEx = /(thanks|thank you|thankyou|cheers|ta)/
+    // let match = msg.toLowerCase().match(greetingRegEx)
+    if (match = msg.toLowerCase().match(thankyouRegEx)) {
+        return new ThankyouIntent(msg)
+    }
+
+    // return greeting intent
     return new UnknownIntent(msg)
 }
 
