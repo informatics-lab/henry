@@ -2,7 +2,7 @@ import { IntentParser, HenryIntent, UnknownIntent, DataLoadIntent, CreateCluster
 
 
 
-const LOAD_DATA_REGEX = /(data|load|find) ([^ ]*) .*(for|from|model) ([^ ]*)/i
+const LOAD_DATA_REGEX = /(data|load|find|get) (.*) (data )?(for|from|model|out of) ([^ ]*)/i
 const CLUSTER_REGEX = /(start|need|want|create|build|make).*cluster/i
 const CLUSTER_SIZE_REGEX = /(min|max)( size)? ([0-9]+)/ig
 
@@ -10,7 +10,7 @@ function parse(msg: string): HenryIntent {
 
     let match = msg.match(LOAD_DATA_REGEX)
     if (match) {
-        return new DataLoadIntent(msg, match[4], match[2])
+        return new DataLoadIntent(msg, match[5], match[2])
     }
 
     if (msg.match(CLUSTER_REGEX)) {
