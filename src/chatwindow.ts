@@ -67,9 +67,6 @@ export class ChatWindow extends Widget {
     private outArea: HTMLElement
     private submitButton: HTMLButtonElement
     private heading: HTMLElement
-    private suggestButton1: HTMLButtonElement
-    private suggestButton2: HTMLButtonElement
-    private suggestButton3: HTMLButtonElement
 
     public readonly nbPanel: NotebookPanel
     private _userMessage = new Signal<this, string>(this)
@@ -96,6 +93,7 @@ export class ChatWindow extends Widget {
 
     private handelSuggest = (evt: Event) => {
         this.input.value = (evt.currentTarget as HTMLElement).innerText
+        this.input.focus()
     }
 
     private handelKeyup = (evt: KeyboardEvent) => {
@@ -131,54 +129,40 @@ export class ChatWindow extends Widget {
         this.input = document.createElement('input')
         this.heading = document.createElement('div')
         this.heading.innerText = "Henry"
-        
-        this.suggestButton1 = document.createElement('button')
-        this.suggestButton2 = document.createElement('button')
-        this.suggestButton3 = document.createElement('button')
+
+
 
         this.submitButton.className = "submit-button"
         this.outArea.className = "henry-output-area"
         this.heading.className = "heading"
         this.input.placeholder = "Ask me something"
-        this.suggestButton1.className = "suggest-button1"
-        this.suggestButton2.className = "suggest-button2"
-        this.suggestButton3.className = "suggest-button3"
 
-        this.suggestButton1.innerText = "Load rain from mogreps"
-        this.suggestButton1.addEventListener('click', this.handelSuggest)
-        this.suggestButton2.innerText = "Load wind from ukv"
-        this.suggestButton2.addEventListener('click', this.handelSuggest)
-        this.suggestButton3.innerText = "Load temperature from global"
-        this.suggestButton3.addEventListener('click', this.handelSuggest)
+
+        this.node.appendChild(this.heading)
+
+
+        const BUTTONARRAY = [
+            "Load wind from mogreps g",
+            "Load temperature from global",
+            "Load wind at pressure from ukv"
+        ]
+
+        for (const phrase of BUTTONARRAY) {
+            var element = document.createElement('button')
+            element.addEventListener('click', this.handelSuggest);
+            element.innerText = phrase
+            element.className = 'suggest-button'
+            this.node.append(element)
+        };
+
+        this.node.appendChild(this.outArea)
+        this.node.appendChild(this.submitButton)
+        this.node.appendChild(this.input)
 
         this.submitButton.innerText = "Send"
         this.submitButton.addEventListener('click', this.handelSubmit)
         this.input.addEventListener('keyup', this.handelKeyup)
 
-        this.node.appendChild(this.heading)
-        this.node.appendChild(this.outArea)
-        this.node.appendChild(this.submitButton)
-        this.node.appendChild(this.input)
-        this.node.appendChild(this.suggestButton1)
-        this.node.appendChild(this.suggestButton2)
-        this.node.appendChild(this.suggestButton3)
     }
 
 }
-
-// const BUTTONARRAY = [
-//     "Load rain from ukv",
-//     "Load wind from mogreps g",
-//     "Load temperature from global",
-// ]
-
-// var i;
-
-// function buttonLoop() {
-//     for (i in BUTTONARRAY) {
-//         var element = document.createElement('button') as HTMLElement
-//         element.addEventListener('click', function handelSuggest(){});  
-//     };
-// }
-
-// buttonLoop();
