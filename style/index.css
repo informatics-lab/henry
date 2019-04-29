@@ -8,14 +8,14 @@
 
 .henry-chat-window {
     padding: 3%;
-    background: white;
+    background: var(--jp-layout-color1);
 }
 
 .henry-chat-window .heading {
     background: var(--jp-layout-color1);
     position: absolute;
     top: 0px;
-    color: white;
+    color: var(--jp-ui-font-color0);
     width: 100%;
     height: 20px;
     font-size: larger;
@@ -24,6 +24,7 @@
     z-index: 10;
     text-align: left;
     padding: 1em;
+    border-bottom: solid 1px var(--jp-brand-color1);
 }
 
 .henry-chat-window .henry-output-area {
@@ -108,7 +109,8 @@
     left: 0px;
     bottom: 0px;
     width: 80%;
-    background: white;
+    background: var(--jp-cell-editor-background);
+    color: var(--jp-ui-font-color0);
     height: 2em;
     padding: 1px;
     padding-left: 2%;
