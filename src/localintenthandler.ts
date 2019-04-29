@@ -74,24 +74,26 @@ function handelLoadDate(intent: DataLoadIntent, nbp: NotebookPanel, context: Doc
     if (cubes.length <= 0) {
         return `Sorry, I couldn't find data for ${intent.param} in ${intent.dataset}.`
     }
-    if (cubes.length > 10) {
-        return `Sorry, I found more than 10 datasets that match param:${intent.param} and model:${intent.dataset}. Can you be more precise?`
+    if (cubes.length > 20) {
+        return `Sorry, I found more than 20 datasets that match param:${intent.param} and model:${intent.dataset}. Can you be more precise?`
     }
+    let varName = intent.param ? intent.param : intent.dataset;
+    varName = varName.toLowerCase().replace(/[ -]+/gi,'_').replace(/[^_a-z]+/gi,'')
 
     let code = "import intake\n"
     if(cubes.length == 1){
-        code += `henry_loaded_data = intake.cat.${cubes[0].key}.read()`
+        code += `${varName} = intake.cat.${cubes[0].key}.read()`
     } else {
-        code += `henry_loaded_data = [\n    ` + cubes.map(cube => `intake.cat.${cube.key}.read()`).join(',\n    ') + `\n]`
+        code += `${varName} = [\n    ` + cubes.map(cube => `intake.cat.${cube.key}.read()`).join(',\n    ') + `\n]`
     }
-    code += "\nhenry_loaded_data"
+    code += `\n${varName}`
     addCell(code, nb, context)
     let msg = `I hope this helps... I loaded ${intent.param} from ${intent.dataset}`;
 
     return msg
 }
 
-function addCell(code: string, nb: Notebook, context: DocumentRegistry.IContext<INotebookModel>, run = false) {
+function addCell(code: string, nb: Notebook, context: DocumentRegistry.IContext<INotebookModel>, run = true) {
     let cell = nb.model.contentFactory.createCodeCell({})
     let insertAt = nb.activeCellIndex + 1
     nb.model.cells.insert(insertAt, cell)

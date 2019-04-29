@@ -54,24 +54,26 @@ interface HypotheticCubeDesc {
 
 }
 
-function cleanSearchTerm(dirty: string) {
-    if (!dirty) {
-        return dirty
+function buildSearchExpression(term: string): RegExp {
+    if (!term) {
+        return null
     }
-    return dirty.toLocaleLowerCase().replace(/[ -_]*/g, '')
+    term = term.replace(/[ ]/g, '.*').replace(/[-_]*/g, '')
+
+    return new RegExp(term, 'i')
 }
 
 export function findCubes(param: string = null, model: string = null): HypotheticCubeDesc[] {
 
-    param = cleanSearchTerm(param)
-    model = cleanSearchTerm(model)
+    let paramRegEx = buildSearchExpression(param)
+    let modelRegEx = buildSearchExpression(model)
 
     let found = cubes
     if (param) {
-        found = found.filter(cube => (cleanSearchTerm(cube.name).search(param) >= 0 || cleanSearchTerm(cube.description).search(param) >= 0))
+        found = found.filter(cube => (cube.name.search(paramRegEx) >= 0 || cube.description.search(paramRegEx) >= 0))
     }
     if (model) {
-        found = found.filter(cube => cleanSearchTerm(cube.model).search(model) >= 0)
+        found = found.filter(cube => cube.model.search(modelRegEx) >= 0)
     }
     return found
 }

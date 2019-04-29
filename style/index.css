@@ -34,8 +34,9 @@
     left: 0px;
     right: 0px;
     padding: 1.5em;
-    padding-top: 4em;
+    padding-top: 5em;
     top: 6em;
+    z-index: -1;
 }
 
 .henry-message {
@@ -63,7 +64,7 @@
     color: white;
 }
 
-.henry-chat-window .suggest-button1 {
+.henry-chat-window .suggest-button {
     position: relative;
     background-color: var(--jp-brand-color1);
     top: 3em;
@@ -71,35 +72,10 @@
     font-size: medium;
     border-radius: 10px;
     margin: 0.3em;
-    margin-left: 10px; 
+    margin-left: 10px;
     color: white;
     border-color: var(--jp-brand-color1);
-}
-
-.henry-chat-window .suggest-button2 {
-    position: relative;
-    background-color: var(--jp-brand-color1);
-    top: 3em;
-    padding: 0.3em;
-    font-size: medium;
-    border-radius: 10px;
-    margin: 0.3em;
-    margin-left: 10px; 
-    color: white;
-    border-color: var(--jp-brand-color1);
-}
-
-.henry-chat-window .suggest-button3 {
-    position: relative;
-    background-color: var(--jp-brand-color1);
-    top: 3em;
-    padding: 0.3em;
-    font-size: medium;
-    border-radius: 10px;
-    margin: 0.3em;
-    margin-left: 10px; 
-    color: white;
-    border-color: var(--jp-brand-color1);
+    max-width: 10em;
 }
 
 .henry-chat-window input {
