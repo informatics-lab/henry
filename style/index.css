@@ -3,6 +3,32 @@
     background: white;
 }
 
+.henry-chat-window .heading {
+    background: var(--jp-layout-color1);
+    position: absolute;
+    top: 0px;
+    color: white;
+    width: 100%;
+    height: 20px;
+    font-size: larger;
+    font-weight: 700;
+    left: 0px;
+    z-index: 10;
+    text-align: left;
+    padding: 1em;
+}
+
+.henry-chat-window .henry-output-area {
+    position: absolute;
+    overflow: scroll;
+    bottom: 2em;
+    left: 0px;
+    right: 0px;
+    padding: 1.5em;
+    padding-top: 4em;
+    top: 6em;
+}
+
 .henry-message {
     display: block;
     padding: 10px;
@@ -28,6 +54,45 @@
     color: white;
 }
 
+.henry-chat-window .suggest-button1 {
+    position: relative;
+    background-color: var(--jp-brand-color1);
+    top: 3em;
+    padding: 0.3em;
+    font-size: medium;
+    border-radius: 10px;
+    margin: 0.3em;
+    margin-left: 10px; 
+    color: white;
+    border-color: var(--jp-brand-color1);
+}
+
+.henry-chat-window .suggest-button2 {
+    position: relative;
+    background-color: var(--jp-brand-color1);
+    top: 3em;
+    padding: 0.3em;
+    font-size: medium;
+    border-radius: 10px;
+    margin: 0.3em;
+    margin-left: 10px; 
+    color: white;
+    border-color: var(--jp-brand-color1);
+}
+
+.henry-chat-window .suggest-button3 {
+    position: relative;
+    background-color: var(--jp-brand-color1);
+    top: 3em;
+    padding: 0.3em;
+    font-size: medium;
+    border-radius: 10px;
+    margin: 0.3em;
+    margin-left: 10px; 
+    color: white;
+    border-color: var(--jp-brand-color1);
+}
+
 .henry-chat-window input {
     box-sizing: border-box;
     display: inline-block;
@@ -45,7 +110,7 @@
     box-shadow: var(--jp-input-box-shadow);
 } 
 
-.henry-chat-window button {
+.henry-chat-window .submit-button {
     box-sizing: border-box;
     display: inline-block;
     position: absolute;
