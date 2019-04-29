@@ -79,8 +79,12 @@ function handelLoadDate(intent: DataLoadIntent, nbp: NotebookPanel, context: Doc
     }
 
     let code = "import intake\n"
-    code += `henry_loaded_data = [\n    ` + cubes.map(cube => `intake.cat.${cube.key}.read()`).join(',\n    ') + `\n]\n`
-    code += "henry_loaded_data"
+    if(cubes.length == 1){
+        code += `henry_loaded_data = intake.cat.${cubes[0].key}.read()`
+    } else {
+        code += `henry_loaded_data = [\n    ` + cubes.map(cube => `intake.cat.${cube.key}.read()`).join(',\n    ') + `\n]`
+    }
+    code += "\nhenry_loaded_data"
     addCell(code, nb, context)
     let msg = `I hope this helps... I loaded ${intent.param} from ${intent.dataset}`;
 
