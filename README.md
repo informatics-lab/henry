@@ -10,7 +10,7 @@ a chat bot for jupyter lab
 ## Installation
 
 ```bash
-jupyter labextension install henry
+jupyter labextension install @informaticslab/henry
 ```
 
 ## Development

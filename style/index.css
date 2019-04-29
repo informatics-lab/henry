@@ -1,3 +1,11 @@
+.henry-cell {
+    transition: background-color 0.5s ease;
+}
+
+.henry-flash {
+    background: #ffffBB !important;
+}
+
 .henry-chat-window {
     padding: 3%;
     background: white;
@@ -108,7 +116,7 @@
     font-weight: 600;
     border: solid 1px var(--jp-brand-color1);
     box-shadow: var(--jp-input-box-shadow);
-} 
+}
 
 .henry-chat-window .submit-button {
     box-sizing: border-box;

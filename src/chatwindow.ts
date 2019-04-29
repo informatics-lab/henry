@@ -83,7 +83,7 @@ export class ChatWindow extends Widget {
         this.title.label = `Henry for ${nbTitle}`;
         this.title.closable = true;
         this.render()
-        this.addReply(`Hi how can I help you with your notebook ${nbTitle}`)
+        this.addReply(`Hi, how can I help you with your notebook "${nbTitle}"?`)
     }
 
     get userMessage(): ISignal<this, string> {
