@@ -102,6 +102,7 @@
     bottom: 0px;
     width: 80%;
     background: var(--jp-cell-editor-background);
+    color: var(--jp-ui-font-color0);
     height: 2em;
     padding: 1px;
     padding-left: 2%;
