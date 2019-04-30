@@ -54,7 +54,7 @@ interface HypotheticCubeDesc {
 
 }
 
-function buildSearchExpression(term: string): RegExp {
+function buildParamSearchExpression(term: string): RegExp {
     if (!term) {
         return null
     }
@@ -63,10 +63,19 @@ function buildSearchExpression(term: string): RegExp {
     return new RegExp(term, 'i')
 }
 
+function buildModelSearchExpression(term: string): RegExp {
+    if (!term) {
+        return null
+    }
+    term = term.replace(/[- _]/g, '[- _]?')
+
+    return new RegExp(term, 'i')
+}
+
 export function findCubes(param: string = null, model: string = null): HypotheticCubeDesc[] {
 
-    let paramRegEx = buildSearchExpression(param)
-    let modelRegEx = buildSearchExpression(model)
+    let paramRegEx = buildParamSearchExpression(param)
+    let modelRegEx = buildModelSearchExpression(model)
 
     let found = cubes
     if (param) {

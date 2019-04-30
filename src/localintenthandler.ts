@@ -50,10 +50,10 @@ function handelCluster(intent: CreateClusterIntent, nbp: NotebookPanel, context:
     let code = `import dask_kubernetes\nimport distributed\ncluster = dask_kubernetes.KubeCluster()\n`
     let args = []
     if (typeof intent.min === 'number') {
-        args.push(`min=${intent.min}`)
+        args.push(`minimum=${intent.min}`)
     }
     if (typeof intent.max === 'number') {
-        args.push(`max=${intent.max}`)
+        args.push(`maximum=${intent.max}`)
     }
     let argStr = args.join(', ')
     code += `cluster.adapt(${argStr})\nclient = distributed.Client(cluster)\ncluster`
