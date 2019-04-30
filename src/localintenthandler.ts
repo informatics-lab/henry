@@ -5,9 +5,9 @@ import { INotebookModel, NotebookPanel, Notebook, NotebookActions } from "@jupyt
 import { Cell } from "@jupyterlab/cells";
 
 const HELLO_RESPONSE = [
-    "Hi there! Would you like some data?",
-    "Hello, I'm here to help.",
-    "Hey! What would you like?",
+    "Hi there!",
+    "Hello",
+    "Hey!",
 ]
 
 const THANKYOU_RESPONSE = [
