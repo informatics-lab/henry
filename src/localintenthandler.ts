@@ -4,9 +4,9 @@ import { INotebookModel, NotebookPanel, NotebookActions } from "@jupyterlab/note
 import { findCubes } from "./datacat";
 
 const HELLO_RESPONSE = [
-    "Hi there! Would you like some data?",
-    "Hello, I'm here to help.",
-    "Hey! What would you like?",
+    "Hi there!",
+    "Hello",
+    "Hey!",
 ]
 
 const THANKYOU_RESPONSE = [
